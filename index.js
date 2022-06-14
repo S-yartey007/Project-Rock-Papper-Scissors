@@ -3,59 +3,68 @@ let random = Math.floor(Math.random() * content.length)
 function computerPlay() {
     return content[random]
 }
-let playerSelection;
-let inputUser;
-function input () {
-     inputUser = prompt("Enter your choice:");
-      playerSelection = inputUser.toLowerCase()
+
+const start = document.querySelector('.start');
+console.log(start)
+const end = document.querySelector('.result'); 
+const btn1 = document.querySelector('.btn1');
+const btn2 = document.querySelector('.btn2');
+const btn3 = document.querySelector('.btn3');
+var computerScore = 0;
+var playerScore = 0;
+start.addEventListener('click',() => {
+    playRound();
+    computerScore = 0;
+    playerScore = 0;
+    end.textContent = '';
+})
+var computerSelection = computerPlay();
+function playRound() {
+    btn1.addEventListener('click',() => {
+        compareResult('rock', computerSelection);
+    })
+    btn2.addEventListener('click', () => {
+        compareResult('papper', computerSelection)
+    })
+    btn3.addEventListener('click', () => {
+        compareResult('scissors', computerSelection)
+    })
+    
 }
 
-const computerSelection = computerPlay()
-function playRound (playerSelection,computerSelection) {
-    computerPlay()
-    input()
-    if(computerSelection === playerSelection) {
-        return "Draw"
-    } else if (computerSelection === "scissors" && playerSelection === "papper") {
-        return "You lose!"
-    } else if (computerSelection === "papper" && playerSelection === "scissors"){
-        return "You win!"
-    } else if (computerSelection === "rock" && playerSelection === "scissors") {
-        return "You lose! "
-    } else if(computerSelection === "scissors" && playerSelection === "rock") {
-        return "You win! "
-    } else if(computerSelection === "papper" && playerSelection === "rock") {
-        return "You win!"
-    }else if (computerSelection === "rock" && playerSelection === "papper") {
-        return "You lose"
-    } else {
-        return "Draw"
+
+function compareResult(string, computerSelection) {
+    finalResult();
+    if(string === computerSelection) {
+        playerScore += 0;
+    } else if(string === 'rock' && computerSelection === 'papper') {
+        computerScore += 1;
+    } else if(string === 'papper' && computerSelection === 'rock') {
+        playerScore += 1;
+    } else if(string === 'scissors' && computerSelection === 'papper') {
+        playerScore += 1;
+    } else if(string === 'papper' && computerSelection === 'scissors') {
+        computerScore += 1;
+    } else if(string === 'rock' && computerSelection === 'scissors') {
+        playerScore += 1;
+    } else if(string === 'scissors' && computerSelection === 'rock') {
+        computerScore += 1;
     }
 }
 
-let currentRound = playRound(playerSelection,computerSelection)
-let playerScore = 0;
-let computerScore = 0;
-function game() {
-    for(let i = 0; i < 2; i++) {
-        playRound(playerSelection,computerSelection)
-        if(currentRound === "You win!") {
-            playerScore ++;
-        } else if(currentRound === "You lose!") {
-            computerScore ++;
+function finalResult() {
+    if(playerScore === 5 || computerScore === 5) {
+        if(playerScore > computerScore) {
+            end.textContent = 'you win';
         } else {
-            playerScore += 0;
-            computerScore += 0;
+            end.textContent = 'you lose';
         }
-        console.log("Playerscore: " + playerScore)
-    }
-    if(computerScore < playerScore) {
-        console.log(currentRound)
-    } else if( computerScore > playerScore ) {
-        console.log(currentRound)
-    } else {
-        console.log(currentRound)
     }
 }
 
-game()
+
+
+
+
+
+
