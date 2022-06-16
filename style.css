@@ -1,11 +1,15 @@
+
 body {
     margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width:100vw;
+    height: 100vh;
+    background-image: url("https://miro.medium.com/max/800/1*8du96SQUQ0NlWmWvVu20Zw.png");
+    background-size:cover ;
 }
 
 #container {
@@ -14,4 +18,72 @@ body {
     justify-content: space-around;
     gap: 50px;
     align-items: center;
+}
+.start {
+    display: flex;
+    justify-content: center;
+}
+button {
+    margin: 5vh;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: yellow;
+    border-style: double;
+    border-color:white;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    
+}
+
+span {
+    font-size: 50px;
+    color: grey;
+    letter-spacing: 8px;
+    cursor: pointer;
+    display: block;
+    font-weight: bolder;
+    transform: translate(0,50%);
+
+    
+}
+span::before {
+    content: "Choose";
+    color: transparent;
+    position:absolute;
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent 0,
+        transparent 2px,
+        white 2px,
+        white 4px
+    );
+    -webkit-background-clip: text;
+    top: 0px;
+    left: 0;
+    z-index: 1;
+    transition: 1s;
+}
+span::after {
+    content: 'Choose';
+    color: transparent;
+    position: absolute;
+    background-image: repeating-linear-gradient(45deg,transparent 0,transparent 2px,white 2px, white 4px);
+    -webkit-background-clip: text;
+    top: 0px;
+    left: 0;
+    z-index: 1;
+    transition: 1s;
+}
+span:hover:before {
+    top: 10px;
+    left: 10px;
+}
+
+span:hover::after {
+    top:-10px;
+    left: -10px;
+}
+button:hover {
+    transform: scale(1.2,1.2);
+
 }

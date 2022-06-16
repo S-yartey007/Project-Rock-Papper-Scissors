@@ -5,11 +5,14 @@ function computerPlay() {
 }
 
 const start = document.querySelector('.start');
-console.log(start)
 const end = document.querySelector('.result'); 
+end.style.color = 'brown';
+end.style.fontSize = '30px';
+end.style.fontWeight ='bolder'
 const btn1 = document.querySelector('.btn1');
 const btn2 = document.querySelector('.btn2');
 const btn3 = document.querySelector('.btn3');
+
 var computerScore = 0;
 var playerScore = 0;
 start.addEventListener('click',() => {
@@ -55,9 +58,10 @@ function compareResult(string, computerSelection) {
 function finalResult() {
     if(playerScore === 5 || computerScore === 5) {
         if(playerScore > computerScore) {
-            end.textContent = 'you win';
+            end.textContent = 'YOU HAVE WON';
+
         } else {
-            end.textContent = 'you lose';
+            end.textContent = 'YOU HAVE LOST';
         }
     }
 }
