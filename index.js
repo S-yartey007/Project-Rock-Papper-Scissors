@@ -1,6 +1,5 @@
-let playerScore = 0;
-let computerScore = 0;
 
+//Return a random string as the computer choice: rock, paper or scissors
 function getComputerChoice() {
         const random = Math.floor(Math.random() * 100)
         if(random <= 30) return "Rock".toLowerCase()
@@ -8,6 +7,7 @@ function getComputerChoice() {
         else return "Scissors".toLowerCase()
 
 }
+//Return a  string human generated string
 
 function getHumanChoice() {
     let humanChoice = prompt("Enter your choice").toString().toLowerCase()
@@ -18,7 +18,7 @@ function getHumanChoice() {
     }
     return humanChoice
 }
-
+//Play a single and judge who by matching the computer and human choice
 function playRound(humanChoice,computerChoice) {
     console.log(humanChoice,computerChoice)
     if(humanChoice === computerChoice) {
@@ -60,7 +60,7 @@ function playRound(humanChoice,computerChoice) {
 
     }
 }
-
+//Play a five round game where the winner is calculated at the end
 function playGame() {
     computerScore = 0;
     playerScore = 0 
