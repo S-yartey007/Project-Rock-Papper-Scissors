@@ -1,3 +1,44 @@
+//Remove the logic that plays five founds
+//Create three buttons, one for each selection of choice for the human
+//The buttons should call the playround function each time the button is clicked with correct playerselection
+//Add a div to display the results of each round;change all console.logs to DOM methods
+//Display the running score and annouces the winner once either player reaches 5 points
+
+let playerScore = 0;
+let computerScore = 0;
+const rock = document.createElement("button");
+const paper = document.createElement("button");
+const scissors = document.createElement("button");
+const newGame = document.createElement('button')
+const results = document.createElement("div");
+const display = document.createElement("div");
+const score = document.createElement("p");
+const body = document.body;
+const choices = [rock,paper,scissors];
+
+
+
+rock.textContent = "Rock"
+paper.textContent = "Paper"
+scissors.textContent = "Scissors"
+newGame.textContent = "New Game"
+results.textContent = "Current round:"
+score.textContent = `human: 0 computer: 0`
+
+body.style.width = "100vw"
+body.style.height = "100vh"
+newGame.classList.add("new-game")
+
+body.appendChild(display)
+body.insertBefore(results,display);
+body.appendChild(score)
+body.appendChild(newGame)
+choices.forEach(choice => {
+    display.appendChild(choice)
+    choice.classList.add(choice.textContent);
+})
+score.classList.add("score");
+results.classList.add("results")
 
 //Return a random string as the computer choice: rock, paper or scissors
 function getComputerChoice() {
@@ -7,80 +48,103 @@ function getComputerChoice() {
         else return "Scissors".toLowerCase()
 
 }
-//Return a  string human generated string
 
-function getHumanChoice() {
-    let humanChoice = prompt("Enter your choice").toString().toLowerCase()
-
-    if(!(humanChoice === "paper" || humanChoice === "rock" || humanChoice === "scissors")) {
-        humanChoice = prompt("Enter valid choice").toString().toLowerCase();
-        console.log(humanChoice)
-    }
-    return humanChoice
-}
 //Play a single and judge who by matching the computer and human choice
 function playRound(humanChoice,computerChoice) {
-    console.log(humanChoice,computerChoice)
+    score.textContent = `human:${playerScore} computer:${computerScore}`
     if(humanChoice === computerChoice) {
         console.log("Draw")
+        results.textContent = "Draw"
     }
     else if(humanChoice === "rock" && computerChoice === "paper") {
-        console.log("You lose this round,paper beats rock")
         computerScore++
-        console.log(computerScore)
+        results.textContent = "You lost this round"
+        score.textContent = `human:${playerScore} computer:${computerScore}`
+
     }
     else if(humanChoice === "paper" && computerChoice === "rock") {
-        console.log("You win this round,paper beats rock")
         playerScore++
-        console.log(playerScore)
+        results.textContent = "You won this round"
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
     else if(humanChoice === "scissors" && computerChoice === "rock") {
-        console.log("You lose this round,rock beats scissors")
-        computerChoice++
-        console.log(computerScore)
+        computerScore++
+        results.textContent = "You lost this round"
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
     else if(humanChoice === "rock" && computerChoice === "scissors") {
-        console.log("You win this round,rock beats scissors")
         playerScore++
-        console.log(playerScore)
+        results.textContent = "You won this round"
+        score.textContent = `human:${playerScore} computer:${computerScore}`
+
 
     } 
     else if(humanChoice === "paper" && computerChoice === "scissors") {
-        console.log("You lose this round,scissors beats paper")
         computerScore++
-        console.log(computerScore)
+        results.textContent = "You lost this round"
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     } 
     else if(humanChoice === "scissors" && computerChoice === "paper") {
-        console.log("You win this round,scissors beats paper")
         playerScore++
-        console.log(playerScoreScore)
+        results.textContent = "You won this round"
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
 }
 //Play a five round game where the winner is calculated at the end
-function playGame() {
-    computerScore = 0;
-    playerScore = 0 
- 
-    for(let i = 0; i < 5; i++) {
-       const  humanChoice = getHumanChoice()
-       const computerChoice = getComputerChoice()
-        playRound(humanChoice,computerChoice);
-        
+
+
+
+
+function handleChoice(e) {
+    if(playerScore >= 5) {
+        score.textContent = "You won,try a new Game"
+        return;
     }
-    if(computerScore === playerScore) {
-        console.log("The game was a draw")
+    else if (computerScore >= 5) {
+        score.textContent = "You lost,try a new Game"
+        return;
     }
-    else if( computerScore > playerScore) {
-        console.log("You lost the game")
+    playRound(e.target.textContent.toLowerCase(),getComputerChoice())
+    if(playerScore >= 5) {
+        score.textContent = "You won the Game!!Congratulations"
+        return;
     }
-    else {
-        console.log("you won!!,Congratulations")
+    else if (computerScore >= 5) {
+        score.textContent = "You lost the Game!!You can try again "
+        return;
     }
+
+  
 }
 
 
-playGame()
+choices.forEach(choice => {
+    choice.addEventListener("click",handleChoice)
+})
+
+newGame.addEventListener("click",() => {
+    playerScore = 0;
+    computerScore = 0;
+    score.textContent = `New Game initialised`
+   
+});
+
+choices.forEach(choice => {
+    choice.addEventListener("mouseenter",() => {
+        choice.classList.remove("unclicked")
+        choice.classList.add("clicked")
+    })
+})
+
+choices.forEach(choice => {
+    choice.addEventListener("mouseleave",() => {
+        choice.classList.add("unclicked")
+        choice.classList.remove("clicked")
+    })
+})
+
+
