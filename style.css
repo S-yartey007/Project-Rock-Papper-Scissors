@@ -4,3 +4,63 @@ body {
     align-items: center;
     justify-content: center;
 }
+.Rock,.Paper,.Scissors {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    margin: 20px;
+    border: 0px;
+    font-weight: 500;
+}
+.Paper:active,.Scissors:active,.Rock:active {
+    transform: translateY(4px);
+    
+}
+.new-game {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .new-game:hover {background-color: #3e8e41}
+  
+  .new-game:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+.new-game:hover {
+    padding: 20px 10px;
+    transition: 0.5s ease-in-out;
+}
+
+.clicked {
+    transform: scale(1.4);
+    background-color: white;
+    border: 1px solid blue;
+    color: blue;
+    transition: 0.5s ease-in-out;
+}
+.unclicked {
+    transform: scale(1);
+    background-color: blue;
+    color: white;
+    transition: 0.5s ease-in-out;
+}
+
+.score,.results {
+    border: 1px solid black;
+    color: black;
+    font-size: 3em;
+    font-weight: 800;
+    padding: 15px;
+    border-radius: 10px;
+}

@@ -21,19 +21,24 @@ const choices = [rock,paper,scissors];
 rock.textContent = "Rock"
 paper.textContent = "Paper"
 scissors.textContent = "Scissors"
-newGame.textContent = "Start a new Game"
+newGame.textContent = "New Game"
 results.textContent = "Current round:"
 score.textContent = `human: 0 computer: 0`
 
 body.style.width = "100vw"
 body.style.height = "100vh"
+newGame.classList.add("new-game")
 
 body.appendChild(display)
 body.insertBefore(results,display);
 body.appendChild(score)
 body.appendChild(newGame)
-choices.forEach(choice => {display.appendChild(choice)})
-
+choices.forEach(choice => {
+    display.appendChild(choice)
+    choice.classList.add(choice.textContent);
+})
+score.classList.add("score");
+results.classList.add("results")
 
 //Return a random string as the computer choice: rock, paper or scissors
 function getComputerChoice() {
@@ -46,7 +51,7 @@ function getComputerChoice() {
 
 //Play a single and judge who by matching the computer and human choice
 function playRound(humanChoice,computerChoice) {
-    score.textContent = `human:${playerScore} computer${computerScore}`
+    score.textContent = `human:${playerScore} computer:${computerScore}`
     if(humanChoice === computerChoice) {
         console.log("Draw")
         results.textContent = "Draw"
@@ -54,67 +59,62 @@ function playRound(humanChoice,computerChoice) {
     else if(humanChoice === "rock" && computerChoice === "paper") {
         computerScore++
         results.textContent = "You lost this round"
-        score.textContent = `human:${playerScore} computer${computerScore}`
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
     else if(humanChoice === "paper" && computerChoice === "rock") {
         playerScore++
         results.textContent = "You won this round"
-        score.textContent = `human:${playerScore} computer${computerScore}`
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
     else if(humanChoice === "scissors" && computerChoice === "rock") {
         computerScore++
         results.textContent = "You lost this round"
-        score.textContent = `human:${playerScore} computer${computerScore}`
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
     else if(humanChoice === "rock" && computerChoice === "scissors") {
         playerScore++
         results.textContent = "You won this round"
-        score.textContent = `human:${playerScore} computer${computerScore}`
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
 
     } 
     else if(humanChoice === "paper" && computerChoice === "scissors") {
         computerScore++
         results.textContent = "You lost this round"
-        score.textContent = `human:${playerScore} computer${computerScore}`
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     } 
     else if(humanChoice === "scissors" && computerChoice === "paper") {
         playerScore++
         results.textContent = "You won this round"
-        score.textContent = `human:${playerScore} computer${computerScore}`
+        score.textContent = `human:${playerScore} computer:${computerScore}`
 
     }
 }
 //Play a five round game where the winner is calculated at the end
-function playGame() {
-   let computerScore = 0;
-   let playerScore = 0;
-        
 
-}
 
 
 
 function handleChoice(e) {
     if(playerScore >= 5) {
-        score.textContent = "You won"
+        score.textContent = "You won,try a new Game"
         return;
     }
     else if (computerScore >= 5) {
-        score.textContent = "You lost"
+        score.textContent = "You lost,try a new Game"
         return;
     }
     playRound(e.target.textContent.toLowerCase(),getComputerChoice())
     if(playerScore >= 5) {
-        score.textContent = "You won"
+        score.textContent = "You won the Game!!Congratulations"
         return;
     }
     else if (computerScore >= 5) {
-        score.textContent = "You lost"
+        score.textContent = "You lost the Game!!You can try again "
         return;
     }
 
@@ -132,5 +132,19 @@ newGame.addEventListener("click",() => {
     score.textContent = `New Game initialised`
    
 });
+
+choices.forEach(choice => {
+    choice.addEventListener("mouseenter",() => {
+        choice.classList.remove("unclicked")
+        choice.classList.add("clicked")
+    })
+})
+
+choices.forEach(choice => {
+    choice.addEventListener("mouseleave",() => {
+        choice.classList.add("unclicked")
+        choice.classList.remove("clicked")
+    })
+})
 
 
